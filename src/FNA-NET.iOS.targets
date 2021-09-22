@@ -1,23 +1,23 @@
 <Project>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
-    <NativeReference Include="..\runtimes\FAudio\net6.0-ios13.6\libFAudio.a">
+    <NativeReference Include="..\runtimes\FAudio\ios\libFAudio.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
       <ForceLoad>True</ForceLoad>
       <LinkerFlags>-framework AVFoundation -framework AudioToolbox -framework CoreGraphics -framework Metal -framework QuartzCore -framework OpenGLES -framework GameController -framework CoreMotion -framework MobileCoreServices -framework ImageIO -framework CoreHaptics</LinkerFlags>
     </NativeReference>
-    <NativeReference Include="..\runtimes\FNA3D\net6.0-ios13.6\libFNA3D.a">
+    <NativeReference Include="..\runtimes\FNA3D\ios\libFNA3D.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
       <ForceLoad>True</ForceLoad>
     </NativeReference>
-    <NativeReference Include="..\runtimes\SDL2\net6.0-ios13.6\libSDL2.a">
+    <NativeReference Include="..\runtimes\SDL2\ios\libSDL2.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
       <ForceLoad>True</ForceLoad>
     </NativeReference>
-    <NativeReference Include="..\runtimes\Theorafile\net6.0-ios13.6\libtheorafile.a">
+    <NativeReference Include="..\runtimes\Theorafile\ios\libtheorafile.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
       <ForceLoad>True</ForceLoad>
