@@ -37,7 +37,11 @@ public static class FAudio
 {
 	#region Native Library Name
 
+#if __IOS__ || __TVOS__
 	const string nativeLibName = "__Internal";
+#else
+	const string nativeLibName = "FAudio";
+#endif
 
 	#endregion
 

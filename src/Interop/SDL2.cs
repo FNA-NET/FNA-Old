@@ -42,7 +42,11 @@ namespace SDL2
 	{
 		#region SDL2# Variables
 
+#if __IOS__ || __TVOS__
 		private const string nativeLibName = "__Internal";
+#else
+		private const string nativeLibName = "SDL2";
+#endif
 
 		#endregion
 
