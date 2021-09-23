@@ -30,6 +30,11 @@ namespace Microsoft.Xna.Framework
 		const string SDL2Version = "-2.0";
 		const string LibNameTheorafile = "libtheorafile";
 
+#if WINDOWS10_0_17763_0_OR_GREATER
+		[DllImport("API-MS-WIN-CORE-LIBRARYLOADER-L2-1-0.DLL", SetLastError = true)]
+		public static extern IntPtr LoadPackagedLibrary([MarshalAs(UnmanagedType.LPWStr)]string libraryName, int reserved = 0);
+#endif
+
 		private static IntPtr ResolveLibrary(
 			string libraryName,
 			Assembly assembly,
@@ -75,9 +80,15 @@ namespace Microsoft.Xna.Framework
 
 				foreach (var path in searchPaths)
 				{
+#if WINDOWS10_0_17763_0_OR_GREATER
+					handle = LoadPackagedLibrary(path);
+					if (handle != IntPtr.Zero)
+						return handle;
+#else
 					success = NativeLibrary.TryLoad(path, out handle);
 					if (success)
 						return handle;
+#endif
 				}
 
 				throw new FileLoadException($"Failed to load native library: {libraryName}!");
