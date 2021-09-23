@@ -94,7 +94,7 @@ Task("Pack")
     .IsDependentOn("Build")
     .WithCriteria(() =>
 {
-    return IsRunningOnWindows();
+    return IsRunningOnWindows() || IsRunningOnMacOs();
 }).Does(() =>
 {
     PackageNuGet(NuGetSpecFile, "Artifacts");
