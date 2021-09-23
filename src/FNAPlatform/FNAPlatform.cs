@@ -26,8 +26,6 @@ namespace Microsoft.Xna.Framework
 
 		static FNAPlatform()
 		{
-			NativeLibraryResolver.Setup();
-
 			/* I suspect you may have an urge to put an #if in here for new
 			 * FNAPlatform implementations.
 			 *

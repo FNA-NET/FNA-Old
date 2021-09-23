@@ -140,7 +140,8 @@ namespace Microsoft.Xna.Framework
 			return "";
 		}
 
-		public static void Setup()
+		[ModuleInitializer]
+		public static void Init()
 		{
 			// Get the platform and architecture
 			string cpu = RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();
