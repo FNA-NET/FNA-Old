@@ -19,6 +19,8 @@
       </group>
       <group targetFramework="net6.0-ios13.6">
       </group>
+      <group targetFramework="net6.0-windows10.0.19041.0">
+      </group>
     </dependencies>
   </metadata>
 
@@ -28,6 +30,9 @@
 
     <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.dll" target="lib/net6.0-ios13.6" />
     <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.pdb" target="lib/net6.0-ios13.6" />
+
+    <file src="..\Artifacts\Release\net6.0-windows10.0.19041.0\FNA.NET.dll" target="lib/net6.0-windows10.0.19041.0" />
+    <file src="..\Artifacts\Release\net6.0-windows10.0.19041.0\FNA.NET.pdb" target="lib/net6.0-windows10.0.19041.0" />
 
     <file src="..\runtimes\FAudio\win-x86\FAudio.dll" target="runtimes\win-x86\native\FAudio.dll" />
     <file src="..\runtimes\FAudio\win-x64\FAudio.dll" target="runtimes\win-x64\native\FAudio.dll" />

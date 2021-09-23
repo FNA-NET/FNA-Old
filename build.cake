@@ -85,17 +85,17 @@ Task("Prep")
 
 Task("Build")
     .IsDependentOn("Prep")
-    .WithCriteria(() =>
-{
-    return IsRunningOnMacOs();
-}).Does(() =>
+    .Does(() =>
 {
     BuildDotnet("src/FNA-NET.csproj");
 });
 
 Task("Pack")
     .IsDependentOn("Build")
-    .Does(() =>
+    .WithCriteria(() =>
+{
+    return IsRunningOnWindows();
+}).Does(() =>
 {
     PackageNuGet(NuGetSpecFile, "Artifacts");
 });
