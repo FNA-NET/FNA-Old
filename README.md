@@ -1,4 +1,5 @@
 # FNA-NET
+[![Nuget](https://img.shields.io/nuget/vpre/FNA.NET)](https://www.nuget.org/packages/FNA.NET/)
 
 FNA-NET is a pure .NET 6+ fork of FNA. Its goal is to develop games with FNA/XNA on the morden .NET 6.0+ platform.
 
