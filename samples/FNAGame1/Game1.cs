@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using SDL2;
@@ -38,6 +39,7 @@ public class Game1 : Game
 
 		// ... then load a texture from ./Content/FNATexture.png
 		_texture1 = Content.Load<Texture2D>("Image1");
+		_sound = Content.Load<SoundEffect>("Sound/120");
 
 		base.LoadContent();
 	}
@@ -50,9 +52,19 @@ public class Game1 : Game
 
 	private SpriteBatch _batch;
 	private Texture2D _texture1;
+	private SoundEffect _sound;
+	private KeyboardState _keyboardPrev = new KeyboardState();
 
 	protected override void Update(GameTime gameTime)
 	{
+		KeyboardState keyboardCur = Keyboard.GetState();
+
+		if (keyboardCur.IsKeyDown(Keys.Space) && _keyboardPrev.IsKeyUp(Keys.Space))
+		{
+			_sound.Play();
+		}
+
+		_keyboardPrev = keyboardCur;
 		base.Update(gameTime);
 	}
 
