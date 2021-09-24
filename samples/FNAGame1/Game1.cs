@@ -40,6 +40,7 @@ public class Game1 : Game
 		// ... then load a texture from ./Content/FNATexture.png
 		_texture1 = Content.Load<Texture2D>("Image1");
 		_sound = Content.Load<SoundEffect>("Sound/120");
+		_grayscaleEffect = Content.Load<Effect>("Effects/Grayscale");
 
 		base.LoadContent();
 	}
@@ -54,6 +55,7 @@ public class Game1 : Game
 	private Texture2D _texture1;
 	private SoundEffect _sound;
 	private KeyboardState _keyboardPrev = new KeyboardState();
+	private Effect _grayscaleEffect;
 
 	protected override void Update(GameTime gameTime)
 	{
@@ -73,7 +75,12 @@ public class Game1 : Game
 		GraphicsDevice.Clear(Color.CornflowerBlue);
 
 		// Draw the texture to the corner of the screen
-		_batch.Begin();
+		_batch.Begin(sortMode: SpriteSortMode.Deferred,
+			effect: _grayscaleEffect,
+			blendState: BlendState.AlphaBlend,
+			samplerState: SamplerState.PointClamp,
+			depthStencilState: DepthStencilState.None,
+			rasterizerState: RasterizerState.CullCounterClockwise);
 		_batch.Draw(_texture1, Vector2.Zero, Color.White);
 		_batch.End();
 
