@@ -7,6 +7,7 @@ on:
 
 jobs:
   ios_build:
+    name: iOS Build
     runs-on: macos-latest
     env:
       DOTNET_NOLOGO: true
@@ -44,7 +45,9 @@ jobs:
           path: Artifacts/Release/net6.0-ios
           retention-days: 1
 
-  windows_build:
+  win_build_and_pack:
+    name: Windows Build & Pack
+    needs: ios_build
     runs-on: windows-latest
     env:
       DOTNET_NOLOGO: true
@@ -85,4 +88,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: FNA-NET Artifacts
-          path: Artifacts/Release/*.nupkg
+          path: Artifacts/*.nupkg
