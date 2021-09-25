@@ -17,6 +17,8 @@
     <dependencies>
       <group targetFramework="net6.0">
       </group>
+      <group targetFramework="net6.0-windows7.0">
+      </group>
       <group targetFramework="net6.0-ios13.6">
       </group>
     </dependencies>
