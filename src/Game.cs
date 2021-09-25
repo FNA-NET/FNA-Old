@@ -23,6 +23,9 @@ namespace Microsoft.Xna.Framework
 {
 	public class Game : IDisposable
 	{
+		public static bool IsDirectXBackend  { get { return SDL2_FNAPlatform.IsDirectXBackend; } }
+
+
 		#region Public Properties
 
 		public GameComponentCollection Components

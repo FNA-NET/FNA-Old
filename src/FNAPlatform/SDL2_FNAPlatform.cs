@@ -53,6 +53,8 @@ namespace Microsoft.Xna.Framework
 
 		private static Vector2 LastPointerPosition;
 
+		public static bool IsDirectXBackend { get; private set; }
+
 		public static string ProgramInit(LaunchParameters args)
 		{
 			// This is how we can weed out cases where fnalibs is missing
@@ -112,6 +114,9 @@ namespace Microsoft.Xna.Framework
 					win32OnPaint,
 					prevUserData
 				);
+
+				var driverHint = SDL.SDL_GetHint("FNA3D_FORCE_DRIVER");
+				IsDirectXBackend = string.IsNullOrEmpty(driverHint) || driverHint == "D3D11";
 			}
 
 			/* Mount TitleLocation.Path */
