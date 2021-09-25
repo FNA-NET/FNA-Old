@@ -9,6 +9,7 @@
 
 #region Using Statements
 using System;
+using SDL2;
 #endregion
 
 namespace Microsoft.Xna.Framework.Input
@@ -114,6 +115,15 @@ namespace Microsoft.Xna.Framework.Input
 			y = (int) ((double) y * INTERNAL_WindowHeight / INTERNAL_BackBufferHeight);
 
 			FNAPlatform.SetMousePosition(WindowHandle, x, y);
+		}
+
+		/// <summary>
+		/// Sets the cursor image to the specified MouseCursor.
+		/// </summary>
+		/// <param name="cursor">Mouse cursor to use for the cursor image.</param>
+		public static void SetCursor(MouseCursor cursor)
+		{
+			SDL.SDL_SetCursor(cursor.Handle);
 		}
 
 		#endregion
