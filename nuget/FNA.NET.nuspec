@@ -18,6 +18,7 @@
       <group targetFramework="net6.0">
       </group>
       <group targetFramework="net6.0-windows7.0">
+        <dependency id="TsfSharp" version="1.0.0" exclude="Build,Analyzers" />
       </group>
       <group targetFramework="net6.0-ios13.6">
       </group>
