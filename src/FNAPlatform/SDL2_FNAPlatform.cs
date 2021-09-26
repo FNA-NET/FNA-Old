@@ -1151,7 +1151,7 @@ namespace Microsoft.Xna.Framework
 							var compositionText = new IMEString(evt.edit.text);
 							if (compositionText.Count > 0)
 							{
-								var cursorPosition = evt.edit.start;
+								var cursorPosition = Math.Min(evt.edit.start, compositionText.Count);
 								sdlImeHandler?.OnTextComposition(compositionText, cursorPosition);
 							}
 						}
