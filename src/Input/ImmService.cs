@@ -13,12 +13,12 @@ namespace Microsoft.Xna.Framework
     public abstract class ImmService
     {
         /// <summary>
-        /// Show the IME Candidate window rendered by the OS.
+        /// Show the IME Candidate window rendered by the OS. Defaults to true.
         /// Set to <c>false</c> if you want to render the IME candidate list yourself.
-        /// On DesktopGL the candidate list is not exposed and this will always return <c>true</c>.
-		/// Note there's no way to toggle this option while game running! Please set this before game run.
+        /// This is a Windows only API.
+		/// Note there's no way to toggle this option while game running! Please set this value main function or static initializer.
         /// </summary>
-        public static bool ShowOSImeWindow { get; set; }
+        public static bool ShowOSImeWindow { get; set; } = true;
 
         /// <summary>
         /// Enable the system IMM service to support composited character input.
