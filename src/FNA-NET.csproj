@@ -38,8 +38,7 @@
   </Target>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-    <Compile Include="..\lib\ImeSharp\ImeSharp\**\*.cs" LinkBase="Utilities\ImeSharp" />
-    <PackageReference Version="1.0.0" Include="TsfSharp" />
+    <Compile Include="..\lib\ImeSharp\ImeSharp\**\*.cs" Exclude="..\lib\ImeSharp\ImeSharp\obj\**\*.cs" LinkBase="Utilities\ImeSharp" />
   </ItemGroup>
 
   <Import Project="FNA-NET.FAudio.targets" />
