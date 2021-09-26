@@ -958,7 +958,7 @@ namespace Microsoft.Xna.Framework
 						PointerId = (int) evt.tfinger.fingerId,
 						Button = InputButton.Left,
 						Delta = Vector2.Zero,
-						Position = new Vector2(evt.tfinger.x, evt.tfinger.y)
+						Position = new Vector2((float) Math.Round(evt.tfinger.x * TouchPanel.DisplayWidth), (float) Math.Round(evt.tfinger.y * TouchPanel.DisplayHeight))
 					});
 				}
 				else if (evt.type == SDL.SDL_EventType.SDL_FINGERMOTION)
@@ -976,8 +976,8 @@ namespace Microsoft.Xna.Framework
 					{
 						PointerId = (int) evt.tfinger.fingerId,
 						Button = InputButton.Left,
-						Delta = new Vector2(evt.tfinger.dx, evt.tfinger.dy),
-						Position = new Vector2(evt.tfinger.x, evt.tfinger.y)
+						Delta = new Vector2((float) Math.Round(evt.tfinger.dx * TouchPanel.DisplayWidth), (float) Math.Round(evt.tfinger.dy * TouchPanel.DisplayHeight)),
+						Position = new Vector2((float) Math.Round(evt.tfinger.x * TouchPanel.DisplayWidth), (float) Math.Round(evt.tfinger.y * TouchPanel.DisplayHeight))
 					});
 				}
 				else if (evt.type == SDL.SDL_EventType.SDL_FINGERUP)
@@ -996,7 +996,7 @@ namespace Microsoft.Xna.Framework
 						PointerId = (int) evt.tfinger.fingerId,
 						Button = InputButton.Left,
 						Delta = Vector2.Zero,
-						Position = new Vector2(evt.tfinger.x, evt.tfinger.y)
+						Position = new Vector2((float) Math.Round(evt.tfinger.x * TouchPanel.DisplayWidth), (float) Math.Round(evt.tfinger.y * TouchPanel.DisplayHeight))
 					});
 				}
 

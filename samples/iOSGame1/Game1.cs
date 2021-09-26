@@ -29,6 +29,19 @@ public class Game1 : Game
 		 * loading configuration stuff in the constructor
 		 */
 		base.Initialize();
+
+		Window.PointerDown += (o, e) =>
+		{
+			System.Console.WriteLine($"PointerDown - PointerId: {e.PointerId}, Position: {e.Position}, Button: {e.Button}");
+		};
+		Window.PointerMove += (o, e) =>
+		{
+			System.Console.WriteLine($"PointerMove - PointerId: {e.PointerId}, Position: {e.Position}, Delta: {e.Delta}");
+		};
+		Window.PointerUp += (o, e) =>
+		{
+			System.Console.WriteLine($"PointerUp - PointerId: {e.PointerId}, Position: {e.Position}");
+		};
 	}
 
 	protected override void LoadContent()
