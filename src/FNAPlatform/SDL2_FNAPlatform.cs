@@ -1149,8 +1149,11 @@ namespace Microsoft.Xna.Framework
 						if (sdlImeHandler != null)
 						{
 							var compositionText = new IMEString(evt.edit.text);
-							var cursorPosition = evt.edit.start;
-							sdlImeHandler?.OnTextComposition(compositionText, cursorPosition);
+							if (compositionText.Count > 0)
+							{
+								var cursorPosition = evt.edit.start;
+								sdlImeHandler?.OnTextComposition(compositionText, cursorPosition);
+							}
 						}
 					}
 				}
