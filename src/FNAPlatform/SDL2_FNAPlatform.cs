@@ -884,6 +884,11 @@ namespace Microsoft.Xna.Framework
 					Mouse.INTERNAL_onClicked(evt.button.button - 1);
 
 					var position = new Vector2(evt.button.x, evt.button.y);
+
+					// Scale the mouse coordinates for the faux-backbuffer
+					position.X = (int) ((double) position.X * Mouse.INTERNAL_BackBufferWidth / Mouse.INTERNAL_WindowWidth);
+					position.Y = (int) ((double) position.Y * Mouse.INTERNAL_BackBufferHeight / Mouse.INTERNAL_WindowHeight);
+
 					game.Window.OnPointerDown(new PointerEventArgs
 					{
 						Button = (InputButton)(1 << (evt.button.button - 1)),
@@ -895,6 +900,11 @@ namespace Microsoft.Xna.Framework
 				else if (evt.type == SDL.SDL_EventType.SDL_MOUSEBUTTONUP)
 				{
 					var position = new Vector2(evt.button.x, evt.button.y);
+
+					// Scale the mouse coordinates for the faux-backbuffer
+					position.X = (int) ((double) position.X * Mouse.INTERNAL_BackBufferWidth / Mouse.INTERNAL_WindowWidth);
+					position.Y = (int) ((double) position.Y * Mouse.INTERNAL_BackBufferHeight / Mouse.INTERNAL_WindowHeight);
+
 					game.Window.OnPointerUp(new PointerEventArgs
 					{
 						Button = (InputButton)(1 << (evt.button.button - 1)),
@@ -906,6 +916,11 @@ namespace Microsoft.Xna.Framework
 				else if (evt.type == SDL.SDL_EventType.SDL_MOUSEMOTION)
 				{
 					var position = new Vector2(evt.motion.x, evt.motion.y);
+
+					// Scale the mouse coordinates for the faux-backbuffer
+					position.X = (int) ((double) position.X * Mouse.INTERNAL_BackBufferWidth / Mouse.INTERNAL_WindowWidth);
+					position.Y = (int) ((double) position.Y * Mouse.INTERNAL_BackBufferHeight / Mouse.INTERNAL_WindowHeight);
+
 					game.Window.OnPointerMove(new PointerEventArgs
 					{
 						Button = (InputButton)evt.motion.state,
