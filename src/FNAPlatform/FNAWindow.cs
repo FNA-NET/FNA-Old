@@ -51,6 +51,12 @@ namespace Microsoft.Xna.Framework
 			}
 		}
 
+		public override Point PositionEXT
+		{
+			get { return ClientBounds.Location; }
+			set { SDL.SDL_SetWindowPosition(window, value.X, value.Y); }
+		}
+
 		public override DisplayOrientation CurrentOrientation
 		{
 			get;

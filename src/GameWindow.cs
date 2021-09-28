@@ -32,6 +32,12 @@ namespace Microsoft.Xna.Framework
 			get;
 		}
 
+		/// <summary>
+		/// Get or set the location of this window on the desktop, eg: global coordinate space
+		/// which stretches across all screens.
+		/// </summary>
+		public virtual Point PositionEXT { get { return ClientBounds.Location; } set {} }
+
 		public abstract DisplayOrientation CurrentOrientation
 		{
 			get;
