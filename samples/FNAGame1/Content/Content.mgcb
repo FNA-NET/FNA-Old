@@ -22,7 +22,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:image1.jpg
+/build:Image1.jpg
 
 #begin Sound/120.wav
 /importer:WavImporter
