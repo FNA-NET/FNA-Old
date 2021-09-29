@@ -6,7 +6,7 @@
 	url = git://github.com/FNA-XNA/FAudio.git
 [submodule "lib/FNA3D"]
 	path = lib/FNA3D
-	url = git://github.com/FNA-XNA/FNA3D.git
+	url = git://github.com/FNA-NET/FNA3D.git
 [submodule "lib/Theorafile"]
 	path = lib/Theorafile
 	url = git://github.com/FNA-XNA/Theorafile.git
