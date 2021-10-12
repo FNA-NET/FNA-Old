@@ -148,6 +148,14 @@ namespace Microsoft.Xna.Framework.Graphics
 			public RenderTargetUsage renderTargetUsage;
 		}
 
+		[StructLayout(LayoutKind.Sequential)]
+		public unsafe struct FNA3D_SysRendererEXT
+		{
+			public int version;
+			public FNA3D_SysRendererTypeEXT rendererType;
+			public fixed byte filters[64];
+		}
+
 		#endregion
 
 		#region Logging
@@ -189,6 +197,9 @@ namespace Microsoft.Xna.Framework.Graphics
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void FNA3D_DestroyDevice(IntPtr device);
+
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void FNA3D_GetSysRendererEXT(IntPtr device, ref FNA3D_SysRendererEXT renderer);
 
 		#endregion
 
@@ -1072,5 +1083,13 @@ namespace Microsoft.Xna.Framework.Graphics
 		}
 
 		#endregion
+	}
+
+	public enum FNA3D_SysRendererTypeEXT
+	{
+		FNA3D_RENDERER_TYPE_OPENGL_EXT,
+		FNA3D_RENDERER_TYPE_VULKAN_EXT,
+		FNA3D_RENDERER_TYPE_D3D11_EXT,
+		FNA3D_RENDERER_TYPE_METAL_EXT
 	}
 }

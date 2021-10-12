@@ -26,6 +26,8 @@ public class Game1 : Game
 
 	protected override void Initialize()
 	{
+		Console.WriteLine($"SysRendererType: {GraphicsDevice.SysRendererTypeEXT}");
+
 		/* This is a nice place to start up the engine, after
 		 * loading configuration stuff in the constructor
 		 */

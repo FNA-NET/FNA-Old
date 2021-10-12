@@ -85,6 +85,8 @@ namespace Microsoft.Xna.Framework.Graphics
 			}
 		}
 
+		public FNA3D_SysRendererTypeEXT SysRendererTypeEXT { get; }
+
 		#endregion
 
 		#region Public GL State Properties
@@ -410,6 +412,10 @@ namespace Microsoft.Xna.Framework.Graphics
 					0
 #endif
 				);
+
+				var renderer = new FNA3D.FNA3D_SysRendererEXT();
+				FNA3D.FNA3D_GetSysRendererEXT(GLDevice, ref renderer);
+				SysRendererTypeEXT = renderer.rendererType;
 			}
 			catch(Exception e)
 			{
