@@ -8,9 +8,11 @@ namespace FNAGame1;
 
 public class Game1 : Game
 {
+	private GraphicsDeviceManager gdm;
+
 	public Game1()
 	{
-		GraphicsDeviceManager gdm = new GraphicsDeviceManager(this);
+		gdm = new GraphicsDeviceManager(this);
 
 		// Typically you would load a config here...
 		gdm.PreferredBackBufferWidth = 1280;
@@ -107,7 +109,16 @@ public class Game1 : Game
 
 		if (keyboardCur.IsKeyDown(Keys.Space) && _keyboardPrev.IsKeyUp(Keys.Space))
 		{
-			_sound.Play();
+			if (gdm.IsFullScreen)
+			{
+				gdm.IsFullScreen = false;
+				gdm.ApplyChanges();
+			}
+			else
+			{
+				gdm.IsFullScreen = true;
+				gdm.ApplyChanges();
+			}
 		}
 
 		_keyboardPrev = keyboardCur;

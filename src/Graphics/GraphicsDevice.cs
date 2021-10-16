@@ -684,6 +684,11 @@ namespace Microsoft.Xna.Framework.Graphics
 			Input.Mouse.INTERNAL_BackBufferWidth = PresentationParameters.BackBufferWidth;
 			Input.Mouse.INTERNAL_BackBufferHeight = PresentationParameters.BackBufferHeight;
 
+			Console.WriteLine("===============");
+			Console.WriteLine($"DeviceReset -- Mouse.INTERNAL_WindowWidthxHeight: {Input.Mouse.INTERNAL_WindowWidth}x{Input.Mouse.INTERNAL_WindowHeight}");
+			Console.WriteLine($"DeviceReset -- Mouse.INTERNAL_BackBufferWidthxHeight: {Input.Mouse.INTERNAL_BackBufferWidth}x{Input.Mouse.INTERNAL_BackBufferHeight}");
+			Console.WriteLine("*=============*");
+
 			// The Touch Panel needs this too, for the same reason.
 			Input.Touch.TouchPanel.DisplayWidth = PresentationParameters.BackBufferWidth;
 			Input.Touch.TouchPanel.DisplayHeight = PresentationParameters.BackBufferHeight;

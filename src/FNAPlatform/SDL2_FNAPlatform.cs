@@ -525,6 +525,11 @@ namespace Microsoft.Xna.Framework
 				Rectangle b = GetWindowBounds(window);
 				Mouse.INTERNAL_WindowWidth = b.Width;
 				Mouse.INTERNAL_WindowHeight = b.Height;
+
+			Console.WriteLine("===============");
+				Console.WriteLine($"ApplyChanges -- Mouse.INTERNAL_WindowWidthxHeight: {Mouse.INTERNAL_WindowWidth}x{Mouse.INTERNAL_WindowHeight}");
+				Console.WriteLine($"ApplyChanges -- Mouse.INTERNAL_BackBufferWidthxHeight: {Mouse.INTERNAL_BackBufferWidth}x{Mouse.INTERNAL_BackBufferHeight}");
+			Console.WriteLine("*=============*");
 			}
 		}
 
