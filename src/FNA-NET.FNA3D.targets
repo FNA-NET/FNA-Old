@@ -1,11 +1,6 @@
 <Project>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' Or '$(TargetFramework)' == 'net6.0-windows'">
-    <Content Include="..\runtimes\FNA3D\win-x86\FNA3D.dll">
-      <Link>runtimes\win-x86\native\FNA3D.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
     <Content Include="..\runtimes\FNA3D\win-x64\FNA3D.dll">
       <Link>runtimes\win-x64\native\FNA3D.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -24,11 +19,6 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows10.0.19041.0'">
   
-    <Content Include="..\runtimes\FNA3D\win10-x86\FNA3D.dll">
-      <Link>runtimes\win10-x86\native\FNA3D.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
     <Content Include="..\runtimes\FNA3D\win10-x64\FNA3D.dll">
       <Link>runtimes\win10-x64\native\FNA3D.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
