@@ -261,7 +261,12 @@ namespace Microsoft.Xna.Framework
 				INTERNAL_AddInstance(evt[0].cdevice.which);
 			}
 
+#if ANDROID
+			// There's no way to get title location in android
+			return "";
+#else
 			return titleLocation;
+#endif
 		}
 
 		public static void ProgramExit(object sender, EventArgs e)

@@ -33,6 +33,10 @@ namespace Microsoft.Xna.Framework
 		{
 			string safeName = MonoGame.Utilities.FileHelpers.NormalizeFilePathSeparators(name);
 
+#if ANDROID
+			return Android.App.Application.Context.Assets.Open(safeName);
+#else
+
 #if CASE_SENSITIVITY_HACK
 			if (Path.IsPathRooted(safeName))
 			{
@@ -45,6 +49,7 @@ namespace Microsoft.Xna.Framework
 				return File.OpenRead(safeName);
 			}
 			return File.OpenRead(Path.Combine(TitleLocation.Path, safeName));
+#endif
 		}
 
 		#endregion
