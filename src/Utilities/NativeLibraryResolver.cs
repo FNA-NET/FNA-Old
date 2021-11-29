@@ -159,7 +159,7 @@ namespace Microsoft.Xna.Framework
 			Threading.ResetThread(System.Threading.Thread.CurrentThread.ManagedThreadId);
 
 			// Set the resolver callback
-#if !__IOS__ && !__TVOS__
+#if !__IOS__ && !__TVOS__ && !ANDROID
 			NativeLibrary.SetDllImportResolver(typeof(NativeLibraryResolver).Assembly, ResolveLibrary);
 #endif
 		}
