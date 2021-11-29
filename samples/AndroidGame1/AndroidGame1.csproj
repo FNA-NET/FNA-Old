@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
@@ -9,8 +9,10 @@
     <ApplicationId>com.companyname.AndroidGame1</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <MonoGamePlatform>Android</MonoGamePlatform>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FNA-NET.csproj" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
 </Project>
