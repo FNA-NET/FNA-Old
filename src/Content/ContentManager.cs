@@ -348,7 +348,12 @@ namespace Microsoft.Xna.Framework.Content
 				}
 				else if ((typeof(T) == typeof(Effect)))
 				{
+#if ANDROID
+					// EffectReader.Normalize() would definitely fail in Android
+					modifiedAssetName = modifiedAssetName + ".fxb";
+#else
 					modifiedAssetName = EffectReader.Normalize(modifiedAssetName);
+#endif
 				}
 				else if ((typeof(T) == typeof(Song)))
 				{
@@ -374,7 +379,15 @@ namespace Microsoft.Xna.Framework.Content
 					);
 				}
 
+#if ANDROID
+				// It's kinda ugly here. -_-
+				var inputStream = TitleContainer.OpenStream(modifiedAssetName);
+				stream = new MemoryStream();
+				inputStream.CopyTo(stream);
+				stream.Seek(0, SeekOrigin.Begin);
+#else
 				stream = TitleContainer.OpenStream(modifiedAssetName);
+#endif
 			}
 
 			// Check for XNB header
