@@ -5,7 +5,9 @@ FNA-NET is a .NET 6+ fork of FNA. Its goal is to develop games with FNA/XNA on t
 
 ## Supported Platforms
 
-Since it's ported with .NET 6.0 from FNA, it should only support platforms which .NET 6 supports. Xbox One is supported by targeting .NETStandard 2.0. Android is not supported like FNA.
+Since it's ported with .NET 6.0 from FNA, it should only support platforms which .NET 6 supports. Xbox One is supported by targeting .NETStandard 2.0.
+
+Android is **supported** now.
 
  - Desktop PCs
    - Windows Direct3D
@@ -18,6 +20,8 @@ Since it's ported with .NET 6.0 from FNA, it should only support platforms which
  - Mobile/Tablet Devices
    - iOS/tvOS Metal
    - iOS/tvOS OpenGL
+   - Android OpenGL
+   - Android Vulkan
  - UWP(XBox One) (.NETStandard 2.0)
 
 ## License
