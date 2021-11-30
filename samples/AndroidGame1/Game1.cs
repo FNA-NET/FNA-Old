@@ -31,7 +31,7 @@ public class Game1 : Game
 		 */
 		base.Initialize();
 
-		Window.KeyDown += (o, e) =>
+		Window.PointerDown += (o, e) =>
 		{
 			_sound.Play();
 		};
