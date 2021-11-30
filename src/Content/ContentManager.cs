@@ -321,6 +321,9 @@ namespace Microsoft.Xna.Framework.Content
 			}
 
 			object result = null;
+#if ANDROID
+			Java.IO.InputStream inputStream = null;
+#endif
 			Stream stream = null;
 			string modifiedAssetName = String.Empty; // Will be used if we have to guess a filename
 			try
@@ -380,11 +383,10 @@ namespace Microsoft.Xna.Framework.Content
 				}
 
 #if ANDROID
-				// It's kinda ugly here. -_-
-				var inputStream = TitleContainer.OpenStream(modifiedAssetName);
-				stream = new MemoryStream();
-				inputStream.CopyTo(stream);
-				stream.Seek(0, SeekOrigin.Begin);
+				// It seems android input stream support seek. It's just a bit ugly now. =_=
+				stream = TitleContainer.OpenStream(modifiedAssetName);
+				inputStream = ((Android.Runtime.InputStreamInvoker)stream).BaseInputStream;
+				inputStream.Mark(0);
 #else
 				stream = TitleContainer.OpenStream(modifiedAssetName);
 #endif
@@ -412,8 +414,13 @@ namespace Microsoft.Xna.Framework.Content
 			{
 				// It's not an XNB file. Try to load as a raw asset instead.
 
+#if ANDROID
+				// Seek to beginning
+				inputStream.Reset();
+#else
 				// FIXME: Assuming seekable streams! -flibit
 				stream.Seek(0, SeekOrigin.Begin);
+#endif
 
 				if (typeof(T) == typeof(Texture2D) || typeof(T) == typeof(Texture))
 				{
@@ -455,8 +462,13 @@ namespace Microsoft.Xna.Framework.Content
 				}
 				else if (typeof(T) == typeof(Effect))
 				{
+#if ANDROID
+					byte[] data = new byte[inputStream.Available()];
+					stream.Read(data, 0, data.Length);
+#else
 					byte[] data = new byte[stream.Length];
 					stream.Read(data, 0, (int) stream.Length);
+#endif
 					Effect effect = new Effect(GetGraphicsDevice(), data);
 					effect.Name = assetName;
 					result = effect;
