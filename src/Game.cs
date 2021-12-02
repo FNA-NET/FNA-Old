@@ -624,6 +624,8 @@ namespace Microsoft.Xna.Framework
 
 		protected virtual void Initialize()
 		{
+			Threading.ResetThread(System.Threading.Thread.CurrentThread.ManagedThreadId);
+
 			/* According to the information given on MSDN, all GameComponents
 			 * in Components at the time Initialize() is called are initialized:
 			 *

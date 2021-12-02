@@ -156,8 +156,6 @@ namespace Microsoft.Xna.Framework
 #pragma warning restore CA2255 // The 'ModuleInitializer' attribute should not be used in libraries
 		public static void Init()
 		{
-			Threading.ResetThread(System.Threading.Thread.CurrentThread.ManagedThreadId);
-
 			// Set the resolver callback
 #if !__IOS__ && !__TVOS__ && !ANDROID
 			NativeLibrary.SetDllImportResolver(typeof(NativeLibraryResolver).Assembly, ResolveLibrary);
