@@ -21,7 +21,6 @@ Android is **supported** now.
    - iOS/tvOS Metal
    - iOS/tvOS OpenGL
    - Android OpenGL
-   - Android Vulkan
  - UWP(XBox One) (.NETStandard 2.0)
 
 ## License
