@@ -8,7 +8,7 @@ using ImeSharp;
 namespace Microsoft.Xna.Framework.Input
 {
     /// <summary>
-    /// Integrate IME to Windows platform with ImeSharp library.
+    /// Integrate IME to Windows desktop platform with ImeSharp library.
     /// </summary>
     internal sealed class WinImeHandler : ImmService
     {

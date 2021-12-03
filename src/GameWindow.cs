@@ -91,7 +91,7 @@ namespace Microsoft.Xna.Framework
 		#endregion
 
 		/// <summary>
-		/// IME service to handle text compositions and inputs. Only works for Desktop Platforms
+		/// IME service to handle text compositions and inputs.
 		/// </summary>
 		public ImmService ImmService { get; internal set; }
 

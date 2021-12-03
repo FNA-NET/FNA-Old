@@ -109,7 +109,6 @@ namespace Microsoft.Xna.Framework
 			deviceName = display;
 			wantsFullscreen = false;
 
-#if !__IOS__
 #if WINDOWS7_0
 			SDL.SDL_SysWMinfo wmInfo = default;
 			SDL.SDL_VERSION(out wmInfo.version);
@@ -117,7 +116,6 @@ namespace Microsoft.Xna.Framework
 			ImmService = new Input.WinImeHandler(wmInfo.info.win.window);
 #else
 			ImmService = new Input.SDLImeHandler();
-#endif
 #endif
 		}
 
