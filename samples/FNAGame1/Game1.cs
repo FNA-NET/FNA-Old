@@ -57,17 +57,6 @@ public class Game1 : Game
 			Console.WriteLine("--------[Text Composition]--------");
 			Console.WriteLine($"CompString {compStr}");
 			Console.WriteLine($"CompCursor {e.CursorPosition}");
-			var candidateList = Window.ImmService.CandidateList();
-			for (int i = 0; i < candidateList.Length; i++)
-			{
-				if (i == Window.ImmService.CandidateSelection)
-					Console.WriteLine($"*{i+1}.Candidates: {candidateList[i]}");
-				else
-					Console.WriteLine($"{i+1}.Candidates: {candidateList[i]}");
-			}
-			Console.WriteLine($"Candidate Size: {candidateList.Length}");
-			Console.WriteLine($"Candidate Selection: {Window.ImmService.CandidateSelection}");
-			Console.WriteLine("==================================");
 		};
 	}
 
