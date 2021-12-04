@@ -55,7 +55,7 @@ namespace Microsoft.Xna.Framework.Input
         /// </summary>
         public abstract event EventHandler<TextInputEventArgs> TextInput;
 
-#if NET
+#if WINDOWS7_0
         /// <summary>
         /// The candidate text list for the current composition.
         /// This property is only supported on Windows.

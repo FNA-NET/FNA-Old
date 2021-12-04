@@ -7,7 +7,7 @@ using System;
 namespace Microsoft.Xna.Framework
 {
     /// <summary>
-    /// Arguments for the <see cref="ImmService.TextComposition" /> event.
+    /// Arguments for the <see cref="Input.ImmService.TextComposition" /> event.
     /// </summary>
     public struct TextCompositionEventArgs
     {
