@@ -134,18 +134,15 @@ namespace FNAImGuiDemo
             _keys.Add(io.KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y);
             _keys.Add(io.KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z);
 
-            if (game.Window.ImmService != null)
+            game.Window.ImmService.TextInput += (o, e) =>
             {
-                game.Window.ImmService.TextInput += (o, e) =>
+                if (e.Character == '\t')
                 {
-                    if (e.Character == '\t')
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    ImGui.GetIO().AddInputCharacter(e.Character);
-                };
-            }
+                ImGui.GetIO().AddInputCharacter(e.Character);
+            };
 
             ImGui.GetIO().Fonts.AddFontDefault();
         }

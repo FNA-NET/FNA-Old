@@ -35,8 +35,6 @@ public class Game1 : Game
 
 		Window.KeyDown += (o, e) =>
 		{
-			if (Window.ImmService == null) return;
-
 			if (e.Key == Keys.F1)
 			{
 				if (Window.ImmService.IsTextInputActive)
@@ -46,34 +44,31 @@ public class Game1 : Game
 			}
 		};
 
-		if (Window.ImmService != null)
+		Window.ImmService.TextInput += (o, e) =>
 		{
-			Window.ImmService.TextInput += (o, e) =>
-			{
-				Console.WriteLine($"[Text Input] {e.Character}");
-			};
+			Console.WriteLine($"[Text Input] {e.Character}");
+		};
 
-			Window.ImmService.TextComposition += (o, e) =>
-			{
-				var compStr = e.CompositionText.ToString();
-				compStr = compStr.Insert(e.CursorPosition, "|");
+		Window.ImmService.TextComposition += (o, e) =>
+		{
+			var compStr = e.CompositionText.ToString();
+			compStr = compStr.Insert(e.CursorPosition, "|");
 
-				Console.WriteLine("--------[Text Composition]--------");
-				Console.WriteLine($"CompString {compStr}");
-				Console.WriteLine($"CompCursor {e.CursorPosition}");
-				var candidateList = Window.ImmService.CandidateList();
-				for (int i = 0; i < candidateList.Length; i++)
-				{
-					if (i == Window.ImmService.CandidateSelection)
-						Console.WriteLine($"*{i+1}.Candidates: {candidateList[i]}");
-					else
-						Console.WriteLine($"{i+1}.Candidates: {candidateList[i]}");
-				}
-				Console.WriteLine($"Candidate Size: {candidateList.Length}");
-				Console.WriteLine($"Candidate Selection: {Window.ImmService.CandidateSelection}");
-				Console.WriteLine("==================================");
-			};
-		}
+			Console.WriteLine("--------[Text Composition]--------");
+			Console.WriteLine($"CompString {compStr}");
+			Console.WriteLine($"CompCursor {e.CursorPosition}");
+			var candidateList = Window.ImmService.CandidateList();
+			for (int i = 0; i < candidateList.Length; i++)
+			{
+				if (i == Window.ImmService.CandidateSelection)
+					Console.WriteLine($"*{i+1}.Candidates: {candidateList[i]}");
+				else
+					Console.WriteLine($"{i+1}.Candidates: {candidateList[i]}");
+			}
+			Console.WriteLine($"Candidate Size: {candidateList.Length}");
+			Console.WriteLine($"Candidate Selection: {Window.ImmService.CandidateSelection}");
+			Console.WriteLine("==================================");
+		};
 	}
 
 	protected override void LoadContent()
