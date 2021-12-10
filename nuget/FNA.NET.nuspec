@@ -21,7 +21,7 @@
       </group>
       <group targetFramework="net6.0-windows7.0">
       </group>
-      <group targetFramework="net6.0-ios13.6">
+      <group targetFramework="net6.0-ios15.0">
       </group>
       <group targetFramework="net6.0-android31.0">
         <dependency id="SDL2DroidSharp-JBindings" version="1.0.0" />
@@ -39,8 +39,9 @@
     <file src="..\Artifacts\Release\net6.0-windows\FNA.NET.dll" target="lib/net6.0-windows7.0" />
     <file src="..\Artifacts\Release\net6.0-windows\FNA.NET.pdb" target="lib/net6.0-windows7.0" />
 
-    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.dll" target="lib/net6.0-ios13.6" />
-    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.pdb" target="lib/net6.0-ios13.6" />
+    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.dll" target="lib/net6.0-ios15.0" />
+    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.pdb" target="lib/net6.0-ios15.0" />
+    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.resources\**\*.*" target="lib/net6.0-ios15.0" />
 
     <file src="..\Artifacts\Release\net6.0-android\FNA.NET.dll" target="lib/net6.0-android31.0" />
     <file src="..\Artifacts\Release\net6.0-android\FNA.NET.aar" target="lib/net6.0-android31.0" />

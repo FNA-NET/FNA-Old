@@ -26,6 +26,7 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
     <IsBindingProject>true</IsBindingProject>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
     <SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
