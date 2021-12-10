@@ -453,7 +453,7 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-lib/SDL*
+lib/SDL2-dev
 
 # Cake Build
 .cake
