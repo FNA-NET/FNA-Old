@@ -24,7 +24,7 @@
       <group targetFramework="net6.0-ios15.0">
       </group>
       <group targetFramework="net6.0-android31.0">
-        <dependency id="SDL2DroidSharp-JBindings" version="1.0.0" />
+        <dependency id="SDL2DroidSharp-JBindings" version="1.0.1" />
       </group>
     </dependencies>
   </metadata>
