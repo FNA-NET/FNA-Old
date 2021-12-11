@@ -12,10 +12,8 @@
 
     <EmbeddedNativeLibrary Include="..\runtimes\SDL2\android\arm64-v8a\libSDL2.so" Link="libs\arm64-v8a\libSDL2.so" />
     <EmbeddedNativeLibrary Include="..\runtimes\SDL2\android\arm64-v8a\libmain.so" Link="libs\arm64-v8a\libmain.so" />
-    <EmbeddedNativeLibrary Include="..\runtimes\SDL2\android\arm64-v8a\libhidapi.so" Link="libs\arm64-v8a\libhidapi.so" />
     <EmbeddedNativeLibrary Include="..\runtimes\SDL2\android\x86_64\libSDL2.so" Link="libs\x86_64\libSDL2.so" />
     <EmbeddedNativeLibrary Include="..\runtimes\SDL2\android\x86_64\libmain.so" Link="libs\x86_64\libmain.so" />
-    <EmbeddedNativeLibrary Include="..\runtimes\SDL2\android\x86_64\libhidapi.so" Link="libs\x86_64\libhidapi.so" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
