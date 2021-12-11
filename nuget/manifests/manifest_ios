@@ -1,0 +1,42 @@
+<BindingAssembly>
+	<NativeReference Name="../../../content/res/FAudio.xcframework">
+		<Kind>Static</Kind>
+		<ForceLoad>True</ForceLoad>
+		<SmartLink>False</SmartLink>
+		<Frameworks>AVFoundation AudioToolbox CoreGraphics Metal QuartzCore OpenGLES GameController CoreMotion MobileCoreServices ImageIO CoreHaptics CoreBluetooth</Frameworks>
+		<WeakFrameworks></WeakFrameworks>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<IsCxx></IsCxx>
+	</NativeReference>
+	<NativeReference Name="../../../content/res/FNA3D.xcframework">
+		<Kind>Static</Kind>
+		<ForceLoad>True</ForceLoad>
+		<SmartLink>False</SmartLink>
+		<Frameworks></Frameworks>
+		<WeakFrameworks></WeakFrameworks>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<IsCxx></IsCxx>
+	</NativeReference>
+	<NativeReference Name="../../../content/res/SDL2.xcframework">
+		<Kind>Static</Kind>
+		<ForceLoad>True</ForceLoad>
+		<SmartLink>False</SmartLink>
+		<Frameworks></Frameworks>
+		<WeakFrameworks></WeakFrameworks>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<IsCxx></IsCxx>
+	</NativeReference>
+	<NativeReference Name="../../../content/res/theorafile.xcframework">
+		<Kind>Static</Kind>
+		<ForceLoad>True</ForceLoad>
+		<SmartLink>False</SmartLink>
+		<Frameworks></Frameworks>
+		<WeakFrameworks></WeakFrameworks>
+		<LinkerFlags></LinkerFlags>
+		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
+		<IsCxx></IsCxx>
+	</NativeReference>
+</BindingAssembly>
