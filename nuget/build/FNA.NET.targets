@@ -5,11 +5,6 @@
         </ItemGroup>
         <Copy SourceFiles="@(BindingResources)" DestinationFolder="$(IntermediateOutputPath)/FNA.NET/%(RecursiveDir)" ContinueOnError="false" />
         <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
-            <NativeReference Include="$(IntermediateOutputPath)/FNA.NET/TwilioVideo.xcframework">
-                <Kind>Framework</Kind>
-                <SmartLink>False</SmartLink>
-            </NativeReference>
-
             <NativeReference Include="$(IntermediateOutputPath)/FNA.NET/FAudio.xcframework">
                 <Kind>Static</Kind>
                 <SmartLink>False</SmartLink>
@@ -34,11 +29,6 @@
         </ItemGroup>
 
         <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-tvos'">
-            <NativeReference Include="$(IntermediateOutputPath)/FNA.NET/TwilioVideo.xcframework">
-                <Kind>Framework</Kind>
-                <SmartLink>False</SmartLink>
-            </NativeReference>
-
             <NativeReference Include="$(IntermediateOutputPath)/FNA.NET/FAudio.xcframework">
                 <Kind>Static</Kind>
                 <SmartLink>False</SmartLink>
