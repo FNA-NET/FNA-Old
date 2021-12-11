@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Target Name="BeforeCompile">
         <ItemGroup>
-            <BindingResources Include="$(MSBuildThisFileDirectory)../content/res/**/*.*" />
+            <BindingResources Include="$(MSBuildThisFileDirectory)../../content/res/**/*.*" />
         </ItemGroup>
         <Copy SourceFiles="@(BindingResources)" DestinationFolder="$(IntermediateOutputPath)/FNA.NET/%(RecursiveDir)" ContinueOnError="false" />
         <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
