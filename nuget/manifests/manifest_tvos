@@ -3,7 +3,7 @@
 		<Kind>Static</Kind>
 		<ForceLoad>False</ForceLoad>
 		<SmartLink>False</SmartLink>
-		<Frameworks>AVFoundation AudioToolbox CoreGraphics Metal QuartzCore OpenGLES GameController CoreBluetooth MobileCoreServices ImageIO</Frameworks>
+		<Frameworks>AVFoundation AudioToolbox CoreGraphics Metal QuartzCore OpenGLES GameController CoreBluetooth MobileCoreServices ImageIO CoreHaptics</Frameworks>
 		<WeakFrameworks></WeakFrameworks>
 		<LinkerFlags></LinkerFlags>
 		<NeedsGccExceptionHandling></NeedsGccExceptionHandling>
