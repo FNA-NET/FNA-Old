@@ -5,6 +5,7 @@
     <OutputType>Exe</OutputType>
     <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
     <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
   </PropertyGroup>
 
   <ItemGroup>
