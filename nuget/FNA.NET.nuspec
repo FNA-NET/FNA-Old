@@ -31,6 +31,7 @@
 
   <files>
     <file src="build\FNA.NET.targets" target="build/FNA.NET.targets" />
+    <file src="build\FNA.NET.targets" target="buildTransitive/FNA.NET.targets" />
 
     <file src="..\Artifacts\Release\netstandard2.0\FNA.NET.dll" target="lib/netstandard2.0" />
     <file src="..\Artifacts\Release\netstandard2.0\FNA.NET.pdb" target="lib/netstandard2.0" />
