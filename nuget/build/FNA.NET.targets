@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!--For MonoGame content builder compability-->
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+  </PropertyGroup>
+</Project>
