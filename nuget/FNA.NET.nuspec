@@ -9,7 +9,7 @@
     <license type="file">LICENSE</license>
     <projectUrl>https://github.com/FNA-NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Pure .NET 6+ fork of FNA.</description>
+    <description>.NET 6 fork of FNA.</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2021 ryancheung</copyright>
     <tags>fna xna net6 ios android</tags>
