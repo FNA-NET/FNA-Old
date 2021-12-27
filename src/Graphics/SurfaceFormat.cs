@@ -99,6 +99,15 @@ namespace Microsoft.Xna.Framework.Graphics
 		/// </summary>
 		ColorBgraEXT,
 		/// <summary>
+		/// Unsigned 32-bit ARGB pixel format for store 8 bits per channel.
+		/// Byte encoding is in sRGB colorspace, read in shader in linear colorspace.
+		/// </summary>
+		ColorSrgbEXT,
+		/// <summary>
+		/// DXT5. Texture format with compression. Surface dimensions must be a multiple 4.
+		/// Byte encoding is in sRGB colorspace, read in shader in linear colorspace.
+		/// </summary>
+		Dxt5SrgbEXT,
 		/// RGB ETC2
 		/// </summary>
 		Rgb8Etc2,

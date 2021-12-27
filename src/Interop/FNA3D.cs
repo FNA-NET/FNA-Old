@@ -817,6 +817,9 @@ namespace Microsoft.Xna.Framework.Graphics
 		public static extern byte FNA3D_SupportsNoOverwrite(IntPtr device);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern byte FNA3D_SupportsSRGBRenderTargets(IntPtr device);
+
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void FNA3D_GetMaxTextureSlots(
 			IntPtr device,
 			out int textures,
