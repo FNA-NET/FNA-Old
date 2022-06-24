@@ -1,18 +1,18 @@
 [submodule "lib/SDL2-CS"]
 	path = lib/SDL2-CS
-	url = git://github.com/flibitijibibo/SDL2-CS.git
+	url = https://github.com/flibitijibibo/SDL2-CS.git
 [submodule "lib/FAudio"]
 	path = lib/FAudio
-	url = git://github.com/FNA-NET/FAudio.git
+	url = https://github.com/FNA-NET/FAudio.git
 [submodule "lib/FNA3D"]
 	path = lib/FNA3D
-	url = git://github.com/FNA-NET/FNA3D.git
+	url = https://github.com/FNA-NET/FNA3D.git
 [submodule "lib/Theorafile"]
 	path = lib/Theorafile
-	url = git://github.com/FNA-XNA/Theorafile.git
+	url = https://github.com/FNA-XNA/Theorafile.git
 [submodule "runtimes"]
 	path = runtimes
-	url = git://github.com/FNA-NET/FNA-NET.runtimes.git
+	url = https://github.com/FNA-NET/FNA-NET.runtimes.git
 [submodule "lib/ImeSharp"]
 	path = lib/ImeSharp
-	url = git://github.com/FNA-NET/ImeSharp.git
+	url = https://github.com/FNA-NET/ImeSharp.git
