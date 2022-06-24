@@ -860,7 +860,6 @@ namespace Microsoft.Xna.Framework
 			Game game,
 			ref GraphicsAdapter currentAdapter,
 			bool[] textInputControlDown,
-			int[] textInputControlRepeat,
 			ref bool textInputSuppress
 		) {
 			var sdlImeHandler = game.Window.ImmService as SDLImeHandler;
@@ -879,15 +878,27 @@ namespace Microsoft.Xna.Framework
 						if (FNAPlatform.TextInputBindings.TryGetValue(key, out textIndex))
 						{
 							textInputControlDown[textIndex] = true;
-							textInputControlRepeat[textIndex] = Environment.TickCount + 400;
 							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[textIndex], key);
 						}
-						else if (Keyboard.keys.Contains(Keys.LeftControl) && key == Keys.V)
+						else if ((Keyboard.keys.Contains(Keys.LeftControl) || Keyboard.keys.Contains(Keys.RightControl))
+							&& key == Keys.V)
 						{
 							textInputControlDown[6] = true;
-							textInputControlRepeat[6] = Environment.TickCount + 400;
 							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[6], key);
 							textInputSuppress = true;
+						}
+					}
+					else if (evt.key.repeat > 0)
+					{
+						int textIndex;
+						if (FNAPlatform.TextInputBindings.TryGetValue(key, out textIndex))
+						{
+							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[textIndex], key);
+						}
+						else if ((Keyboard.keys.Contains(Keys.LeftControl) || Keyboard.keys.Contains(Keys.RightControl))
+							&& key == Keys.V)
+						{
+							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[6], key);
 						}
 					}
 
@@ -912,7 +923,8 @@ namespace Microsoft.Xna.Framework
 						{
 							textInputControlDown[value] = false;
 						}
-						else if ((!Keyboard.keys.Contains(Keys.LeftControl) && textInputControlDown[6]) || key == Keys.V)
+						else if (((!Keyboard.keys.Contains(Keys.LeftControl) && !Keyboard.keys.Contains(Keys.RightControl)) && textInputControlDown[6])
+							|| key == Keys.V)
 						{
 							textInputControlDown[6] = false;
 							textInputSuppress = false;
@@ -1236,15 +1248,6 @@ namespace Microsoft.Xna.Framework
 				{
 					game.RunApplication = false;
 					break;
-				}
-			}
-			// Text Input Controls Key Handling
-			for (int i = 0; i < FNAPlatform.TextInputCharacters.Length; i += 1)
-			{
-				if (textInputControlDown[i] && textInputControlRepeat[i] <= Environment.TickCount)
-				{
-					var c = FNAPlatform.TextInputCharacters[i];
-					sdlImeHandler?.OnTextInput(c, KeyboardUtil.ToXna(c));
 				}
 			}
 		}
