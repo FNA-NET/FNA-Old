@@ -25,6 +25,8 @@
 
     <ObjcBindingApiDefinition Include="DummyApiDefinition.cs" />
     <ObjcBindingCoreSource Include="**\*.cs" Exclude="obj\**\*.cs" />
+
+    <PackageReference Include="FNA.NET.MoltenVK" Version="1.0.0.5" />
   </ItemGroup>
 
 </Project>

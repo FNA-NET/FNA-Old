@@ -21,7 +21,11 @@
       </group>
       <group targetFramework="net6.0-windows7.0">
       </group>
-      <group targetFramework="net6.0-ios15.0">
+      <group targetFramework="net6.0-ios15.4">
+        <dependency id="FNA.NET.MoltenVK" version="1.0.0.5" />
+      </group>
+      <group targetFramework="net6.0-tvos15.4">
+        <dependency id="FNA.NET.MoltenVK" version="1.0.0.5" />
       </group>
       <group targetFramework="net6.0-android31.0">
         <dependency id="SDL2DroidSharp-JBindings" version="1.0.1" />
@@ -42,13 +46,13 @@
     <file src="..\Artifacts\Release\net6.0-windows\FNA.NET.dll" target="lib/net6.0-windows7.0" />
     <file src="..\Artifacts\Release\net6.0-windows\FNA.NET.pdb" target="lib/net6.0-windows7.0" />
 
-    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.dll" target="lib/net6.0-ios15.0" />
-    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.pdb" target="lib/net6.0-ios15.0" />
-    <file src="manifests\manifest_ios" target="lib/net6.0-ios15.0/FNA.NET.resources/manifest" />
+    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.dll" target="lib/net6.0-ios15.4" />
+    <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.pdb" target="lib/net6.0-ios15.4" />
+    <file src="manifests\manifest_ios" target="lib/net6.0-ios15.4/FNA.NET.resources/manifest" />
 
-    <file src="..\Artifacts\Release\net6.0-tvos\FNA.NET.dll" target="lib/net6.0-tvos15.0" />
-    <file src="..\Artifacts\Release\net6.0-tvos\FNA.NET.pdb" target="lib/net6.0-tvos15.0" />
-    <file src="manifests\manifest_tvos" target="lib/net6.0-tvos15.0/FNA.NET.resources/manifest" />
+    <file src="..\Artifacts\Release\net6.0-tvos\FNA.NET.dll" target="lib/net6.0-tvos15.4" />
+    <file src="..\Artifacts\Release\net6.0-tvos\FNA.NET.pdb" target="lib/net6.0-tvos15.4" />
+    <file src="manifests\manifest_tvos" target="lib/net6.0-tvos15.4/FNA.NET.resources/manifest" />
 
     <file src="..\Artifacts\Release\net6.0-ios\FNA.NET.resources\**\*.*" target="content/res" />
 
