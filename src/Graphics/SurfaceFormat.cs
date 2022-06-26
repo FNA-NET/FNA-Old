@@ -1,6 +1,6 @@
 #region License
 /* FNA - XNA4 Reimplementation for Desktop Platforms
- * Copyright 2009-2021 Ethan Lee and the MonoGame Team
+ * Copyright 2009-2022 Ethan Lee and the MonoGame Team
  *
  * Released under the Microsoft Public License.
  * See LICENSE for details.
@@ -99,6 +99,23 @@ namespace Microsoft.Xna.Framework.Graphics
 		/// </summary>
 		ColorBgraEXT,
 		/// <summary>
+		/// Unsigned 32-bit ARGB pixel format for store 8 bits per channel.
+		/// Byte encoding is in sRGB colorspace, read in shader in linear colorspace.
+		/// </summary>
+		ColorSrgbEXT,
+		/// <summary>
+		/// DXT5. Texture format with compression. Surface dimensions must be a multiple 4.
+		/// Byte encoding is in sRGB colorspace, read in shader in linear colorspace.
+		/// </summary>
+		Dxt5SrgbEXT,
+		/// <summary>
+		/// BC7 block texture format
+		/// </summary>
+		Bc7EXT,
+		/// <summary>
+		/// BC7 block texture format where the R/G/B values are non-linear sRGB.
+		/// </summary>
+		Bc7SrgbEXT,
 		/// RGB ETC2
 		/// </summary>
 		Rgb8Etc2,

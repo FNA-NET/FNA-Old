@@ -1,6 +1,6 @@
 #region License
 /* FNA - XNA4 Reimplementation for Desktop Platforms
- * Copyright 2009-2021 Ethan Lee and the MonoGame Team
+ * Copyright 2009-2022 Ethan Lee and the MonoGame Team
  *
  * Released under the Microsoft Public License.
  * See LICENSE for details.
@@ -82,6 +82,13 @@ namespace Microsoft.Xna.Framework
 		[ModuleInitializer]
 		public static void Init()
 		{
+			// Ignore NativeAOT platforms since they don't perform dynamic loading.
+			// FIXME: Is the iOS check needed?
+			if (!RuntimeFeature.IsDynamicCodeSupported && !OperatingSystem.IsIOS())
+			{
+				return;
+			}
+
 			// Get the platform and architecture
 			string os = GetPlatformName();
 			string cpu = RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();

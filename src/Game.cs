@@ -1,6 +1,6 @@
 #region License
 /* FNA - XNA4 Reimplementation for Desktop Platforms
- * Copyright 2009-2021 Ethan Lee and the MonoGame Team
+ * Copyright 2009-2022 Ethan Lee and the MonoGame Team
  *
  * Released under the Microsoft Public License.
  * See LICENSE for details.
@@ -223,7 +223,6 @@ namespace Microsoft.Xna.Framework
 		private static readonly TimeSpan MaxElapsedTime = TimeSpan.FromMilliseconds(500);
 
 		private bool[] textInputControlDown;
-		private int[] textInputControlRepeat;
 		private bool textInputSuppress;
 
 		#endregion
@@ -263,7 +262,6 @@ namespace Microsoft.Xna.Framework
 			}
 
 			textInputControlDown = new bool[FNAPlatform.TextInputCharacters.Length];
-			textInputControlRepeat = new int[FNAPlatform.TextInputCharacters.Length];
 
 			hasInitialized = false;
 			suppressDraw = false;
@@ -462,7 +460,6 @@ namespace Microsoft.Xna.Framework
 				this,
 				ref currentAdapter,
 				textInputControlDown,
-				textInputControlRepeat,
 				ref textInputSuppress
 			);
 
@@ -652,11 +649,17 @@ namespace Microsoft.Xna.Framework
 			 */
 			graphicsDeviceService = (IGraphicsDeviceService)
 				Services.GetService(typeof(IGraphicsDeviceService));
-			if (	graphicsDeviceService != null &&
-				graphicsDeviceService.GraphicsDevice != null	)
+			if (graphicsDeviceService != null)
 			{
 				graphicsDeviceService.DeviceDisposing += (o, e) => UnloadContent();
-				LoadContent();
+				if (graphicsDeviceService.GraphicsDevice != null)
+				{
+					LoadContent();
+				}
+				else
+				{
+					graphicsDeviceService.DeviceCreated += (o, e) => LoadContent();
+				}
 			}
 		}
 

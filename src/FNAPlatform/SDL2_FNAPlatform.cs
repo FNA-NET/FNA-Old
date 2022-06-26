@@ -1,6 +1,6 @@
 #region License
 /* FNA - XNA4 Reimplementation for Desktop Platforms
- * Copyright 2009-2021 Ethan Lee and the MonoGame Team
+ * Copyright 2009-2022 Ethan Lee and the MonoGame Team
  *
  * Released under the Microsoft Public License.
  * See LICENSE for details.
@@ -35,10 +35,6 @@ namespace Microsoft.Xna.Framework
 		) == "1";
 
 		private static bool SupportsGlobalMouse;
-
-		// For iOS high dpi support
-		private static int RetinaWidth;
-		private static int RetinaHeight;
 
 		#endregion
 
@@ -140,11 +136,36 @@ namespace Microsoft.Xna.Framework
 			 *
 			 * -flibit
 			 */
+			string useLabels = (Environment.GetEnvironmentVariable(
+				"FNA_GAMEPAD_IGNORE_PHYSICAL_LAYOUT"
+			) == "1") ? "1" : "0";
 			SDL.SDL_SetHintWithPriority(
 				SDL.SDL_HINT_GAMECONTROLLER_USE_BUTTON_LABELS,
-				"0",
+				useLabels,
 				SDL.SDL_HintPriority.SDL_HINT_OVERRIDE
 			);
+
+			// Are you even surprised this is necessary?
+			if (Environment.GetEnvironmentVariable("FNA_NUKE_STEAM_INPUT") == "1")
+			{
+				SDL.SDL_SetHintWithPriority(
+					"SDL_GAMECONTROLLER_IGNORE_DEVICES",
+					"0x28DE/0x11FF",
+					SDL.SDL_HintPriority.SDL_HINT_OVERRIDE
+				);
+				SDL.SDL_SetHintWithPriority(
+					"SDL_GAMECONTROLLER_IGNORE_DEVICES_EXCEPT",
+					"",
+					SDL.SDL_HintPriority.SDL_HINT_OVERRIDE
+				);
+
+				// This should be redundant, but who knows...
+				SDL.SDL_SetHintWithPriority(
+					"SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD",
+					"0",
+					SDL.SDL_HintPriority.SDL_HINT_OVERRIDE
+				);
+			}
 
 			// Built-in SDL2 command line arguments
 			string arg;
@@ -194,24 +215,34 @@ namespace Microsoft.Xna.Framework
 			// This _should_ be the first real SDL call we make...
 			SDL.SDL_Init(
 				SDL.SDL_INIT_VIDEO |
-				SDL.SDL_INIT_JOYSTICK |
-				SDL.SDL_INIT_GAMECONTROLLER |
-				SDL.SDL_INIT_HAPTIC
+				SDL.SDL_INIT_GAMECONTROLLER
 			);
+
+			string videoDriver = SDL.SDL_GetCurrentVideoDriver();
 
 			/* A number of platforms don't support global mouse, but
 			 * this really only matters on desktop where the game
 			 * screen may not be covering the whole display.
 			 */
-			if (	OSVersion.Equals("Windows") ||
-				OSVersion.Equals("Mac OS X") ||
-				SDL.SDL_GetCurrentVideoDriver() == "x11"	)
+			SupportsGlobalMouse = (	OSVersion.Equals("Windows") ||
+						OSVersion.Equals("Mac OS X") ||
+						videoDriver.Equals("x11")	);
+
+			/* High-DPI is really annoying and only some platforms
+			 * actually let you control the drawable surface.
+			 */
+			if (	!videoDriver.Equals("wayland") &&
+				!videoDriver.Equals("cocoa") &&
+				!videoDriver.Equals("uikit")	)
 			{
-				SupportsGlobalMouse = true;
-			}
-			else
-			{
-				SupportsGlobalMouse = false;
+				/* Note that this is NOT an override.
+				 * We can be overruled, just in case.
+				 */
+				SDL.SDL_SetHintWithPriority(
+					SDL.SDL_HINT_VIDEO_HIGHDPI_DISABLED,
+					"1",
+					SDL.SDL_HintPriority.SDL_HINT_NORMAL
+				);
 			}
 
 			/* We need to change the Windows default here, as the
@@ -376,18 +407,10 @@ namespace Microsoft.Xna.Framework
 			 * This is our way to communicate that it failed...
 			 * -flibit
 			 */
-			int drawX, drawY;
-			FNA3D.FNA3D_GetDrawableSize(window, out drawX, out drawY);
-			if (	drawX == GraphicsDeviceManager.DefaultBackBufferWidth &&
-				drawY == GraphicsDeviceManager.DefaultBackBufferHeight	)
+			initFlags = (SDL.SDL_WindowFlags) SDL.SDL_GetWindowFlags(window);
+			if ((initFlags & SDL.SDL_WindowFlags.SDL_WINDOW_ALLOW_HIGHDPI) == 0)
 			{
 				Environment.SetEnvironmentVariable("FNA_GRAPHICS_ENABLE_HIGHDPI", "0");
-			}
-			else
-			{
-				// Store the full retina resolution of the display
-				RetinaWidth = drawX;
-				RetinaHeight = drawY;
 			}
 
 			return new FNAWindow(
@@ -433,16 +456,12 @@ namespace Microsoft.Xna.Framework
 			ref string resultDeviceName
 		) {
 			bool center = false;
-			if (Environment.GetEnvironmentVariable("FNA_GRAPHICS_ENABLE_HIGHDPI") == "1")
-			{
-				/* For high-DPI windows, halve the size!
-				 * The drawable size is now the primary width/height, so
-				 * the window needs to accommodate the GL viewport.
-				 * -flibit
-				 */
-				clientWidth /= 2;
-				clientHeight /= 2;
-			}
+
+			/* The drawable size is now the primary width/height, so
+			 * the window needs to accommodate the GL viewport.
+			 * -flibit
+			 */
+			ScaleForWindow(window, false, ref clientWidth, ref clientHeight);
 
 			// When windowed, set the size before moving
 			if (!wantsFullscreen)
@@ -530,6 +549,30 @@ namespace Microsoft.Xna.Framework
 				Rectangle b = GetWindowBounds(window);
 				Mouse.INTERNAL_WindowWidth = b.Width;
 				Mouse.INTERNAL_WindowHeight = b.Height;
+			}
+		}
+
+		public static void ScaleForWindow(IntPtr window, bool invert, ref int w, ref int h)
+		{
+			int ww, wh, dw, dh;
+			SDL.SDL_GetWindowSize(window, out ww, out wh);
+			FNA3D.FNA3D_GetDrawableSize(window, out dw, out dh);
+			if (	ww != 0 &&
+				wh != 0 &&
+				dw != 0 &&
+				dh != 0 &&
+				(ww != dw || wh != dh)	)
+			{
+				if (invert)
+				{
+					w = (int) (w * ((float) dw / (float) ww));
+					h = (int) (h * ((float) dh / (float) wh));
+				}
+				else
+				{
+					w = (int) (w / ((float) dw / (float) ww));
+					h = (int) (h / ((float) dh / (float) wh));
+				}
 			}
 		}
 
@@ -754,6 +797,7 @@ namespace Microsoft.Xna.Framework
 		private static void INTERNAL_HandleOrientationChange(
 			DisplayOrientation orientation,
 			GraphicsDevice graphicsDevice,
+			GraphicsAdapter graphicsAdapter,
 			FNAWindow window
 		) {
 			// Flip the backbuffer dimensions if needed
@@ -777,7 +821,10 @@ namespace Microsoft.Xna.Framework
 			graphicsDevice.PresentationParameters.DisplayOrientation = orientation;
 			window.CurrentOrientation = orientation;
 
-			graphicsDevice.Reset();
+			graphicsDevice.Reset(
+				graphicsDevice.PresentationParameters,
+				graphicsAdapter
+			);
 			window.INTERNAL_OnOrientationChanged();
 		}
 
@@ -813,7 +860,6 @@ namespace Microsoft.Xna.Framework
 			Game game,
 			ref GraphicsAdapter currentAdapter,
 			bool[] textInputControlDown,
-			int[] textInputControlRepeat,
 			ref bool textInputSuppress
 		) {
 			var sdlImeHandler = game.Window.ImmService as SDLImeHandler;
@@ -832,15 +878,27 @@ namespace Microsoft.Xna.Framework
 						if (FNAPlatform.TextInputBindings.TryGetValue(key, out textIndex))
 						{
 							textInputControlDown[textIndex] = true;
-							textInputControlRepeat[textIndex] = Environment.TickCount + 400;
 							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[textIndex], key);
 						}
-						else if (Keyboard.keys.Contains(Keys.LeftControl) && key == Keys.V)
+						else if ((Keyboard.keys.Contains(Keys.LeftControl) || Keyboard.keys.Contains(Keys.RightControl))
+							&& key == Keys.V)
 						{
 							textInputControlDown[6] = true;
-							textInputControlRepeat[6] = Environment.TickCount + 400;
 							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[6], key);
 							textInputSuppress = true;
+						}
+					}
+					else if (evt.key.repeat > 0)
+					{
+						int textIndex;
+						if (FNAPlatform.TextInputBindings.TryGetValue(key, out textIndex))
+						{
+							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[textIndex], key);
+						}
+						else if ((Keyboard.keys.Contains(Keys.LeftControl) || Keyboard.keys.Contains(Keys.RightControl))
+							&& key == Keys.V)
+						{
+							sdlImeHandler?.OnTextInput(FNAPlatform.TextInputCharacters[6], key);
 						}
 					}
 
@@ -865,7 +923,8 @@ namespace Microsoft.Xna.Framework
 						{
 							textInputControlDown[value] = false;
 						}
-						else if ((!Keyboard.keys.Contains(Keys.LeftControl) && textInputControlDown[6]) || key == Keys.V)
+						else if (((!Keyboard.keys.Contains(Keys.LeftControl) && !Keyboard.keys.Contains(Keys.RightControl)) && textInputControlDown[6])
+							|| key == Keys.V)
 						{
 							textInputControlDown[6] = false;
 							textInputSuppress = false;
@@ -1068,7 +1127,7 @@ namespace Microsoft.Xna.Framework
 						 */
 						uint flags = SDL.SDL_GetWindowFlags(game.Window.Handle);
 						if (	(flags & (uint) SDL.SDL_WindowFlags.SDL_WINDOW_RESIZABLE) != 0 &&
-							(flags & (uint) SDL.SDL_WindowFlags.SDL_WINDOW_INPUT_FOCUS) != 0	)
+							(flags & (uint) (SDL.SDL_WindowFlags.SDL_WINDOW_INPUT_FOCUS | SDL.SDL_WindowFlags.SDL_WINDOW_MOUSE_FOCUS)) != 0	)
 						{
 							((FNAWindow) game.Window).INTERNAL_ClientSizeChanged();
 						}
@@ -1130,7 +1189,16 @@ namespace Microsoft.Xna.Framework
 						INTERNAL_HandleOrientationChange(
 							orientation,
 							game.GraphicsDevice,
+							currentAdapter,
 							(FNAWindow) game.Window
+						);
+					}
+					else
+					{
+						// Just reset, this is probably a hotplug
+						game.GraphicsDevice.Reset(
+							game.GraphicsDevice.PresentationParameters,
+							currentAdapter
 						);
 					}
 				}
@@ -1180,15 +1248,6 @@ namespace Microsoft.Xna.Framework
 				{
 					game.RunApplication = false;
 					break;
-				}
-			}
-			// Text Input Controls Key Handling
-			for (int i = 0; i < FNAPlatform.TextInputCharacters.Length; i += 1)
-			{
-				if (textInputControlDown[i] && textInputControlRepeat[i] <= Environment.TickCount)
-				{
-					var c = FNAPlatform.TextInputCharacters[i];
-					sdlImeHandler?.OnTextInput(c, KeyboardUtil.ToXna(c));
 				}
 			}
 		}
@@ -1299,13 +1358,7 @@ namespace Microsoft.Xna.Framework
 			SDL.SDL_DisplayMode filler = new SDL.SDL_DisplayMode();
 			SDL.SDL_GetCurrentDisplayMode(adapterIndex, out filler);
 
-			if (	OSVersion.Equals("iOS") &&
-				Environment.GetEnvironmentVariable("FNA_GRAPHICS_ENABLE_HIGHDPI") == "1"	)
-			{
-				// Provide the actual resolution in pixels, not points.
-				filler.w = RetinaWidth;
-				filler.h = RetinaHeight;
-			}
+			// FIXME: iOS needs to factor in the DPI!
 
 			return new DisplayMode(
 				filler.w,
