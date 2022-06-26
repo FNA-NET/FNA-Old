@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
-    <PackageReference Include="SDL2DroidSharp-JBindings" Version="1.0.1" />
+    <PackageReference Include="SDL2DroidSharp-JBindings" Version="1.0.2" />
   </ItemGroup>
 
 </Project>

@@ -28,7 +28,7 @@
         <dependency id="FNA.NET.MoltenVK" version="1.0.0.5" />
       </group>
       <group targetFramework="net6.0-android31.0">
-        <dependency id="SDL2DroidSharp-JBindings" version="1.0.1" />
+        <dependency id="SDL2DroidSharp-JBindings" version="1.0.2" />
       </group>
     </dependencies>
   </metadata>
