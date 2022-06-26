@@ -15,11 +15,10 @@ Android is **supported** now.
    - Windows OpenGL
    - Linux Vulkan
    - Linux OpenGL
-   - macOS Metal
+   - macOS Vulkan(via MoltenVK)
    - macOS OpenGL
  - Mobile/Tablet Devices
-   - iOS/tvOS Metal
-   - iOS/tvOS OpenGL
+   - iOS/tvOS Vulkan(via MoltenVK)
    - Android OpenGL
  - UWP(XBox One) (.NETStandard 2.0)
 
