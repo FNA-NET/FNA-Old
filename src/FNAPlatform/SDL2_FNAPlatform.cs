@@ -1358,7 +1358,14 @@ namespace Microsoft.Xna.Framework
 			SDL.SDL_DisplayMode filler = new SDL.SDL_DisplayMode();
 			SDL.SDL_GetCurrentDisplayMode(adapterIndex, out filler);
 
-			// FIXME: iOS needs to factor in the DPI!
+			// FIXME: Hardcode iOS retina resolution since `SDL_Vulkan_GetDrawableSize` is not correct with MoltenVK
+			if (	OSVersion.Equals("iOS") &&
+				Environment.GetEnvironmentVariable("FNA_GRAPHICS_ENABLE_HIGHDPI") == "1"	)
+			{
+				// Provide the actual resolution in pixels, not points.
+				filler.w *= 2;
+				filler.h *= 2;
+			}
 
 			return new DisplayMode(
 				filler.w,
